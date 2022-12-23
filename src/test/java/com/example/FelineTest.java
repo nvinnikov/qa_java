@@ -1,16 +1,38 @@
 package com.example;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+
+@RunWith(Parameterized.class)
 
 public class FelineTest {
+    private final int expectedKittensCount;
+    private final int kittensCount;
 
+    public FelineTest(int expectedKittensCount, int kittensCount){
+        this.expectedKittensCount = expectedKittensCount;
+        this.kittensCount = kittensCount;
+}    @Parameterized.Parameters
+    public static Object[][] params(){
+        return new Object[][] {
+                {1, 1},
+                {2, 2},
+        };
+    }
     @Test
     public void eatMeat() throws Exception {
         Feline feline = new Feline();
-        assertEquals("Хищник", feline.eatMeat());
+        assertEquals(List.of("Животные", "Птицы", "Рыба"), feline.eatMeat());
     }
 
     @Test
@@ -21,9 +43,13 @@ public class FelineTest {
 
     @Test
     public void getKittens() {
+        Feline feline = new Feline();
+        assertEquals(1, feline.getKittens());
     }
 
     @Test
     public void testGetKittens() {
+        Feline feline = new Feline();
+        assertEquals(expectedKittensCount, feline.getKittens(kittensCount));
     }
 }

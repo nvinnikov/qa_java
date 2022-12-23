@@ -1,5 +1,6 @@
 package com.example;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,33 +32,32 @@ public class LionTest {
     }
 
     @Parameterized.Parameters
-    public static Object[][] params(){
+    public static Object[][] params() {
         return new Object[][] {
                 {"Самец", true},
-                {"Самка", false},
-                //{"123", "Используйте допустимые значения пола животного - самей или самка"}
+                {"Самка", false}
         };
     }
 
 
     @Test
-    public void getKittens() throws Exception {
+    public void getKittensTest() throws Exception {
         Mockito.when(feline.getKittens()).thenReturn(1);
         Lion lion = new Lion(feline, sex);
-        assertEquals(1, lion.getKittens());
+        Assert.assertEquals(1, lion.getKittens());
 
     }
 
     @Test
-    public void doesHaveMane() throws Exception {
+    public void doesHaveManeTest() throws Exception {
         Lion lion = new Lion(feline, sex);
-        assertEquals(expectedRes, lion.doesHaveMane());
+        Assert.assertEquals(expectedRes, lion.doesHaveMane());
     }
 
     @Test
-    public void getFood() throws Exception {
+    public void getFoodTest() throws Exception {
         Lion lion = new Lion(feline, sex);
         Mockito.when(feline.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
-        assertEquals(List.of("Животные", "Птицы", "Рыба"), lion.getFood());
+        Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"), lion.getFood());
     }
 }
