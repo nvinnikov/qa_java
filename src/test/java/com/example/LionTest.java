@@ -11,9 +11,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
-
-import static org.junit.Assert.assertEquals;
-
 @RunWith(Parameterized.class)
 public class LionTest {
     private final boolean expectedRes;
@@ -22,23 +19,23 @@ public class LionTest {
     @Mock
     Feline feline;
 
-    @Before
-    public void setUp(){
-        MockitoAnnotations.initMocks(this);
-    }
-    public LionTest(String sex, boolean expectedRes){
+    public LionTest(String sex, boolean expectedRes) {
         this.sex = sex;
         this.expectedRes = expectedRes;
     }
 
     @Parameterized.Parameters
     public static Object[][] params() {
-        return new Object[][] {
+        return new Object[][]{
                 {"Самец", true},
                 {"Самка", false}
         };
     }
 
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void getKittensTest() throws Exception {
